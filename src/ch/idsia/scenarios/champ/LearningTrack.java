@@ -217,10 +217,10 @@ public static void main(String[] args){
 	//LearningAgent learningAgent = new LearningWithAstar("-lde on -i on -ltb off -ld 2 -ls 0 -le g");
 	
 	/* MainTask4_2.java */
-	LearningAgent learningAgent = new LearningWithAstar("-lco off -lb on -le off -lhb off -lg on -ltb on -lhs off -lca on -lde on -ld 5 -ls 133829");
+	//LearningAgent learningAgent = new LearningWithAstar("-lco off -lb on -le off -lhb off -lg on -ltb on -lhs off -lca on -lde on -ld 5 -ls 133829");
 	
 	/* MainTask4_3.java */
-	//LearningAgent learningAgent = new LearningWithGA("-lde on -i off -ld 30 -ls 133434 -lhb on");
+	LearningAgent learningAgent = new LearningWithAstar("-lde on -i off -ld 30 -ls 133434 -lhb on");
 	
 	System.out.println("main.learningAgent = " + learningAgent);
 

@@ -34,7 +34,7 @@ public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
     /* コンストラクタ */
     public AstarAgent() {
         super(name);
-        actions = new byte[3000];
+        actions = new byte[3000]; //frame per (mario) second
     }
 
     public boolean[] getAction() {
@@ -57,23 +57,23 @@ public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
         }
 
         // マリオが初ダメージを受けた時のactionIndexをdamagedIndexに格納
-        if (damagedIndex == 0 && marioMode != 2) damagedIndex = actionIndex;
+        if (damagedIndex == 0 && marioMode != 2) damagedIndex = actionIndex;// got damaged at current frame 一回だけ実行する
 
         // 進んでない場合
         if (distancePassedCells <= preDist) {
             samePlace++;
             if (samePlace > 15 && !isDeadEnd) {
                 isDeadEnd = true;
-                deadEndIndex = actionIndex;
+                deadEndIndex = actionIndex;//今のフレームで詰まって死んだ
             } else if (samePlace > 7) {
                 action[Mario.KEY_RIGHT] = true;
             }
         } else {
             samePlace = 0;
             preDist = distancePassedCells;
-        }
+        }// 1フレーム前より進んでない場合
 
-        actionIndex++;
+        actionIndex++; //なんフレームたったかはわかる
 
         return action;
     }
@@ -91,10 +91,10 @@ public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
         Random r = new Random();
         byte act = 0;
         int rnd = r.nextInt(99);
-        if (rnd < 10) act += 1;                  // left
+        if (rnd < 10) act += 1;                  // left　10%の確率で左
         else if (rnd >= 20) act += 2;            // right
 //        if (r.nextInt(99) < 10) act += 4;      // down
-        if (r.nextInt(99) < 80) act += 8;     // jump
+        if (r.nextInt(99) < 80) act += 8;     // jump　　80%の確率でjump
         if (r.nextInt(99) < 70) act += 16;    // speed
         return act;
     }

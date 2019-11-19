@@ -411,5 +411,11 @@ public class OwnLearningWithGA implements LearningAgent {
 	public void init() {
 
 	}
+	
+//	public static void main(String[] args) {
+//		 OwnLearningWithGA process = new OwnLearningWithGA(String.join(" ", args));
+//		 process.learn();
+//		 System.exit(0);
+//	} 実行
 
 }

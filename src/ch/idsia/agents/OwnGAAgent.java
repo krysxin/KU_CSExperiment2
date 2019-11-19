@@ -33,7 +33,7 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 	Random r = new Random();
 	
 	public int evaluation;
-
+    public static Random ran;
 	private int over_brick_frame = 0; // brickの上にある
 	private int total_upper_obstacle = 0; // 上の障害物を数える
 	private int total_frame = 0; // すべてのobstacleの数
@@ -348,17 +348,38 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 
 		return res;
 	}
+	
+	public void cross(OwnGAAgent Parent1, OwnGAAgent Parent2, OwnGAAgent child) {
+		for(int n=0; n< child.gene.length;n++) {
+			child.gene[n] = ran.nextDouble() < 0.5 ? Parent1.gene[n] : Parent2.gene[n];
+		}
+	}
 
+	public void mutate(double rate) {
+		for (int n=0; n< gene.length; n++) {
+			if(ran.nextDouble()<rate) {
+			gene[n]=(byte) ran.nextInt();
+		}
+		}
+	}
+	
+	
 	@Override
 	public void mutate() {
 		// TODO 自動生成されたメソッド・スタブ
-
+        
 	}
+	
+	
 
 	@Override
 	public Evolvable copy() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
+	}
+	
+	public static void copy(OwnGAAgent src, OwnGAAgent dist) {
+		System.arraycopy(src.gene, 0, dist.gene, 0, src.gene.length);
 	}
 
 }

@@ -45,7 +45,7 @@ public static void main(String[] args)
 
     final Agent agent = (Agent)Easy.load("LearningWithAStar-2019-11-19_15-48-32.xml");
    
-    marioAIOptions.setAgent(agent);
+    //marioAIOptions.setAgent(agent);
     
    
     marioAIOptions.setArgs("-lco off -lb on -le off -lhb off -lg on -ltb on -lhs off -lca on -lde on -ld 5 -ls 133829");

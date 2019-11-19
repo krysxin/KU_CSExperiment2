@@ -27,24 +27,40 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 	public int fitness;
 
 	/* 環境から取得する入力数 */
-	public int inputNum = 19;
+	public int inputNum = 16;
 
 	/* 乱数用変数 r */
 	Random r = new Random();
 	
-	private int over_brick_frame = 0; //brickの上にある
-	private int total_upper_obstacle = 0; //上の障害物を数える
-	private int total_frame = 0; //すべてのobstacleの数
-	
+	public int evaluation;
+
+	private int over_brick_frame = 0; // brickの上にある
+	private int total_upper_obstacle = 0; // 上の障害物を数える
+	private int total_frame = 0; // すべてのobstacleの数
+
 	public OwnGAAgent(int gene_size, String args) {
 		super("OwnGAAgent");
+		gene = new byte[(1 << inputNum)];
 		loadFromFile(args);
+
+		fitness = 0;
+
+		over_brick_frame = 0;
+		total_upper_obstacle = 0;
+		total_frame = 0;
 	}
 
 	/* コンストラクタ */
 	public OwnGAAgent() {
-
 		super(name);
+		
+		if(overBrick()) {
+			over_brick_frame++;
+		}
+		total_upper_obstacle += countUpperObstacle();
+		total_frame ++ ;
+
+		
 
 		/* 16ビットの入力なので，65536(=2^16)個用意する */
 		gene = new byte[(1 << inputNum)];
@@ -94,10 +110,10 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 
 		/* 評価値を0で初期化 */
 		fitness = 0;
-		
+
 		over_brick_frame = 0;
 		total_upper_obstacle = 0;
-		total_frame = 0; 
+		total_frame = 0;
 
 	}
 
@@ -203,9 +219,9 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 
 		/* ルールベース */
 
-		/*if (!action[Mario.KEY_LEFT]) {
-			action[Mario.KEY_RIGHT] = true;
-		}*/
+		/*
+		 * if (!action[Mario.KEY_LEFT]) { action[Mario.KEY_RIGHT] = true; }
+		 */
 
 		if (isGap(marioEgoRow, marioEgoCol + 2)) {
 			action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
@@ -215,16 +231,7 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 			action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
 		}
 
-		if (action[Mario.KEY_JUMP] && getEnemiesCellValue(marioEgoRow, marioEgoCol + 1) != 0
-				| getReceptiveFieldCellValue(marioEgoRow, marioEgoCol + 2) != 0) {
-			action[Mario.KEY_JUMP] = isMarioAbleToJump;
-		}
-
-		/*
-		 * if(distancePassedCells>=95 && distancePassedCells < 128) {
-		 * action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround; }
-		 */
-
+		
 		return action;
 	}
 
@@ -262,14 +269,40 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 	public int getDistance() {
 		return distance;
 	}
+	
+	public int getEvaluaiton() {
+		return evaluation;
+	}
+	public void setEvaluaiton(int evaluation) {
+		this.evaluation = evaluation;
+	}
+	
+	private boolean OverBrick() {
+		
+	}
+	
+	private int countUpperObstacle() {
+		
+	}
 
-	/* ここからファイルロード */
+	
+	
+	public void SaveToFile(String args) {
+		
+	}
+	
+	public void loadFromFile(String args) {
+		
+	}
+	
+	/* ここからファイルロード (途中結果）*/
 
-	public static void saveLearningGene(OwnGAAgent[] agents, String args) {
+	public static void saveLearningGene(OwnGAAgent[][] agents, String args) {
 		try (FileOutputStream out = new FileOutputStream(convertFileName(args) + "gene")) {
-			//for (OwnGAAgent[] island:agents)  島
-			for (OwnGAAgent agent : agents) {
+			for (OwnGAAgent[] island: agents) { //島
+			for (OwnGAAgent agent : island) {
 				out.write(agent.gene);
+			}
 			}
 			out.flush();
 		} catch (IOException e) {
@@ -277,10 +310,12 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 		}
 	}
 
-	public static void loadLearningGene(OwnGAAgent[] agents, String args) {
+	public static void loadLearningGene(OwnGAAgent[][] agents, String args) {
 		try (FileInputStream in = new FileInputStream(convertFileName(args) + "gene")) {
-			for (OwnGAAgent agent : agents) {
+			for (OwnGAAgent[] island: agents) {
+			for (OwnGAAgent agent : island) {
 				in.read(agent.gene);
+			}
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("There is not file yet");
@@ -289,10 +324,12 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 		}
 	}
 
-	public static String convertFileName(String args) { return args.replace(" ",
-	  " ").replace("-", ""); }
+	public static String convertFileName(String args) {
+		return args.replace(" ", " ").replace("-", "");
+	}
 	// ここまでファイルロード
 
+	
 	@Override
 	public Evolvable getNewInstance() {
 		// TODO 自動生成されたメソッド・スタブ

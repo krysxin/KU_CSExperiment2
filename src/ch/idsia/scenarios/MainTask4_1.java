@@ -52,7 +52,7 @@ public static void main(String[] args)
     //AgentsPool.addAgent(AgentsPool.loadAgent("/export/home/018/a0181154/eclipse-workspace/first/LearningWithGA-2019-11-12_17-23-30.xml",false)); //131 fail
    //AgentsPool.addAgent(AgentsPool.loadAgent("/export/home/018/a0181154/eclipse-workspace/first/ LearningWithAStar-2019-11-19_13-38-05.xml",false));
     //final Agent agent = (Agent)Easy.load("LearningWithAStar-2019-11-19_14-58-14.xml"); //clear
-    final Agent agent = (Agent)Easy.load("LearningWithAStar-2019-11-25_16-06-35.xml");
+    final Agent agent = (Agent)Easy.load("LearningWithFPS-2019-11-25_18-39-39.xml"); //fail
     
    
    //Agent agent = AgentsPool.getCurrentAgent();

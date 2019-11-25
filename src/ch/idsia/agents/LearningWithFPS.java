@@ -92,9 +92,9 @@ public class LearningWithFPS implements LearningAgent {
 
 			// クリアしたらループを抜ける
 			if (evaluationInfo.distancePassedCells >= 256 && evaluationInfo.marioMode == 2) {
-				setNextAgent(agent, bestAgent, 1);
-				// agent = nextAgent.clone();
-				// bestAgent = agent.clone();
+				setNextAgent(agent, nextAgent, 1);
+				agent = nextAgent.clone();
+				bestAgent = agent.clone();
 				break;
 			}
 

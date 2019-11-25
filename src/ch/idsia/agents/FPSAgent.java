@@ -6,7 +6,7 @@ import ch.idsia.benchmark.mario.environments.Environment;
 import java.util.Random;
 
 
-public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
+public class FPSAgent extends BasicMarioAIAgent implements Agent, Cloneable {
 
     static String name = "FPSAgent";
 
@@ -32,7 +32,7 @@ public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
     private boolean isDeadEnd = false;
 
     /* コンストラクタ */
-    public AstarAgent() {
+    public FPSAgent() {
         super(name);
         actions = new byte[3000]; // total frames（125*24）
     }
@@ -52,9 +52,9 @@ public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
 
         // actの値からactionを決定
         for (int i = 0; i < Environment.numberOfKeys; i++) {
-            action[i] = (act % 2 == 1); //　ex. act = 8 -> action[3](=jump)
+            action[i] = (act % 2 == 1); //　ex. act = 8 -> action[3] (action[]={left,right,down,jump,speed})
             act /= 2;
-        } //action[]={left,right,down,jump,speed}
+        } //
 
         // マリオが初ダメージを受けた時のactionIndexをdamagedIndexに格納
         if (damagedIndex == 0 && marioMode != 2) damagedIndex = actionIndex;// got damaged at current frame 一回だけ実行する
@@ -93,7 +93,6 @@ public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
         int rnd = r.nextInt(99);
         if (rnd < 10) act += 1;                  // left　10%の確率で左
         else if (rnd >= 20) act += 2;            // right
-//        if (r.nextInt(99) < 10) act += 4;      // down
         if (r.nextInt(99) < 80) act += 8;     // jump　　80%の確率でjump
         if (r.nextInt(99) < 70) act += 16;    // speed  70%の確率でダッシュ
         return act;
@@ -124,11 +123,11 @@ public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
     }
 
     @Override
-    public AstarAgent clone() {
+    public FPSAgent clone() {
 
-        AstarAgent res;
+        FPSAgent res;
         try {
-            res = (AstarAgent) super.clone();
+            res = (FPSAgent) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new InternalError(e.toString());
         }

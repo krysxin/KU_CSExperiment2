@@ -32,6 +32,7 @@ import ch.idsia.agents.LearningAgent;
 import ch.idsia.agents.LearningWithGA;
 import ch.idsia.agents.OwnLearningWithGA;
 import ch.idsia.agents.LearningWithAstar;
+import ch.idsia.agents.LearningWithFPS;
 import ch.idsia.benchmark.tasks.BasicTask;
 import ch.idsia.benchmark.tasks.LearningTask;
 import ch.idsia.tools.EvaluationInfo;
@@ -214,13 +215,16 @@ public static void main(String[] args){
 	/* 学習に用いるAgentを指定 */
 
 	/* MainTask4_1.java */
-	//LearningAgent learningAgent = new LearningWithAstar("-lde on -i on -ltb off -ld 2 -ls 0 -le g");
+	LearningAgent learningAgent = new LearningWithFPS("-lde on -i on -ltb off -ld 2 -ls 0 -le g");
 	
 	/* MainTask4_2.java */
-	//LearningAgent learningAgent = new LearningWithAstar("-lco off -lb on -le off -lhb off -lg on -ltb on -lhs off -lca on -lde on -ld 5 -ls 133829");
+	//LearningAgent learningAgent = new LearningWithFPS("-lco off -lb on -le off -lhb off -lg on -ltb on -lhs off -lca on -lde on -ld 5 -ls 133829");
 	
 	/* MainTask4_3.java */
-	LearningAgent learningAgent = new LearningWithAstar("-lde on -i off -ld 30 -ls 133434 -lhb on");
+	//LearningAgent learningAgent = new LearningWithFPS("-lde on -i off -ld 30 -ls 133434 -lhb on");
+	
+	/* MainTask3.java */
+	//LearningAgent learningAgent = new LearningWithFPS("-lhs off -ltb on -lg off -lb off -ld 1 -ls 0 -le g");
 	
 	System.out.println("main.learningAgent = " + learningAgent);
 

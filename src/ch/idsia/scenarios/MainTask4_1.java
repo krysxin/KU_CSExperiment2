@@ -46,14 +46,14 @@ public static void main(String[] args)
 {
     final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
 
-    //final Agent agent = new GAAgent;
-    //final Agent agent = new IgnoreObstacleAgent();
    //marioAIOptions.setAgent(agent);
    //AgentsPool.addAgent(AgentsPool.loadAgent("/export/home/018/a0181154/eclipse-workspace/first/LearningWithGA-2019-11-12_14-12-11.xml",false)); //132.1
    //AgentsPool.addAgent(AgentsPool.loadAgent("/export/home/018/a0181154/eclipse-workspace/first/LearningWithGA-2019-11-12_16-50-50.xml",false)); //132.2new failed
     //AgentsPool.addAgent(AgentsPool.loadAgent("/export/home/018/a0181154/eclipse-workspace/first/LearningWithGA-2019-11-12_17-23-30.xml",false)); //131 fail
    //AgentsPool.addAgent(AgentsPool.loadAgent("/export/home/018/a0181154/eclipse-workspace/first/ LearningWithAStar-2019-11-19_13-38-05.xml",false));
-    final Agent agent = (Agent)Easy.load("LearningWithAStar-2019-11-19_14-58-14.xml");
+    //final Agent agent = (Agent)Easy.load("LearningWithAStar-2019-11-19_14-58-14.xml"); //clear
+    final Agent agent = (Agent)Easy.load("LearningWithAStar-2019-11-25_16-06-35.xml");
+    
    
    //Agent agent = AgentsPool.getCurrentAgent();
     

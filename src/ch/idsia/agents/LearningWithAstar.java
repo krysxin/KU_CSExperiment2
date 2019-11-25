@@ -32,6 +32,8 @@ public class LearningWithAstar implements LearningAgent {
 
     // 死んだ地点を記録するハッシュマップ
     private HashMap<Integer, Integer> deathPoints = new HashMap<Integer, Integer>();
+    // 死んだ地点を記録する配列
+    private int deathPoints2[] = new int[256];
 
 
     /* LearningWithAStarのコンストラクタ */
@@ -74,11 +76,17 @@ public class LearningWithAstar implements LearningAgent {
             EvaluationInfo evaluationInfo = basicTask.getEvaluationInfo();
 
             // 死んだ地点を取得し記録する
-            deathPoint = evaluationInfo.distancePassedCells;
-            if (deathPoints.containsKey(deathPoint))
-                deathPoints.put(deathPoint, deathPoints.get(deathPoint) + 1);
-            else
-                deathPoints.put(deathPoint, 1);
+//            deathPoint = evaluationInfo.distancePassedCells;
+//            if (deathPoints.containsKey(deathPoint))
+//                deathPoints.put(deathPoint, deathPoints.get(deathPoint) + 1);
+//            else
+//                deathPoints.put(deathPoint, 1);
+            // 死んだ地点を取得し記録する
+            if(deathPoints2[deathPoint]!= 0) {
+            	deathPoints2[deathPoint] +=1 ;
+            }else {
+            	deathPoints2[deathPoint] =1;
+            }
 
             // 次の世代のagentを用意
             AstarAgent nextAgent = new AstarAgent();
@@ -136,17 +144,18 @@ public class LearningWithAstar implements LearningAgent {
         byte[] actions = agent.getActions();
 
         // 巻き戻すインデックス
-        int rewindIndex = deathPoints.get(deathPoint) / 300 * 20;
+        //int rewindIndex = deathPoints.get(deathPoint) / 300 * 20;
+        int rewindIndex = deathPoints2[deathPoint]/300 * 20; //300
 
         // クリアした時
         if (n == 1) {
             nextAgent.setActions(actions);
             return;
         }
-        // ダメージを受けた時
-        if (damagedIndex < actionIndex && damagedIndex != 0) {
+        // ダメージを受けた時  //damagedIndex < actionIndex &&
+        if ( damagedIndex != 0) {
             for (int i = damagedIndex - 10; i < actions.length; i++) {
-                actions[i] = 0;
+                actions[i] = 0;   //ダメージを受けたフレームの１０個前から以降のすべてのフレームでのactionをランダムに決める
             }
         }
         // 行き詰まった時
@@ -157,7 +166,7 @@ public class LearningWithAstar implements LearningAgent {
         }
         // 同じ場所で死に過ぎたらカウントを初期化
         if (rewindIndex > actionIndex) {
-            deathPoints.put(deathPoint, 1);
+            deathPoints2[deathPoint]=1;
         // 同じ場所で何回も死んだ時
         } else if (rewindIndex >= 20) {
             for (int i = actionIndex - rewindIndex; i < actions.length; i++) {

@@ -363,6 +363,10 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 		}
 	}
 	
+	public static void copy(OwnGAAgent src, OwnGAAgent dist) {
+		System.arraycopy(src.gene, 0, dist.gene, 0, src.gene.length);
+	}
+	
 	
 	@Override
 	public void mutate() {
@@ -378,8 +382,6 @@ public class OwnGAAgent extends BasicMarioAIAgent implements Agent, Evolvable, C
 		return null;
 	}
 	
-	public static void copy(OwnGAAgent src, OwnGAAgent dist) {
-		System.arraycopy(src.gene, 0, dist.gene, 0, src.gene.length);
-	}
+	
 
 }

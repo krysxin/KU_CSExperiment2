@@ -29,6 +29,7 @@ package ch.idsia.scenarios;
 
 import ch.idsia.benchmark.tasks.BasicTask;
 import ch.idsia.tools.MarioAIOptions;
+import ch.idsia.utils.wox.serial.Easy;
 import ch.idsia.agents.Agent;
 import ch.idsia.agents.controllers.IgnoreObstacleAgent;
 
@@ -41,8 +42,10 @@ public final class MainTask4_3
 public static void main(String[] args)
 {
     final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
+    
+    
 
-    final Agent agent = new IgnoreObstacleAgent();
+    final Agent agent = (Agent)Easy.load("LearningWithAStar-2019-11-19_18-55-41.xml");
     marioAIOptions.setAgent(agent);
 
     marioAIOptions.setArgs("-lde on -i off -ld 30 -ls 133434 -lhb on");

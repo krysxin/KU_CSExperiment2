@@ -44,8 +44,10 @@ public static void main(String[] args)
     final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
     
     
-
-    final Agent agent = (Agent)Easy.load("LearningWithFPS-2019-11-19_18-55-41.xml");
+    final Agent agent = (Agent)Easy.load("LearningWithFPS-2019-11-25_20-21-56.xml"); //clear
+    //final Agent agent = (Agent)Easy.load("LearningWithFPS-2019-11-19_18-55-41.xml"); //clear
+   
+   
     marioAIOptions.setAgent(agent);
 
     marioAIOptions.setArgs("-lde on -i off -ld 30 -ls 133434 -lhb on");

@@ -1,0 +1,28 @@
+[~ Mario AI Benchmark ~ 0.1.9]
+
+[MarioAI] ~ Evaluation Results for Task: BasicTask
+        Evaluation lasted : 39810 ms
+         Weighted Fitness : 9320
+             Mario Status : WIN!
+               Mario Mode : FIRE
+Collisions with creatures : 0
+     Passed (Cells, Phys) : 256 of 256, 4096 of 4096 (100% passed)
+ Time Spent(marioseconds) : 64
+  Time Left(marioseconds) : 135
+             Coins Gained : 9 of 70 (12% collected)
+      Hidden Blocks Found : 2 of 15 (13% found)
+       Mushrooms Devoured : 0 of 0 found (0% collected)
+         Flowers Devoured : 0 of 0 found (0% collected)
+              kills Total : 59 of 220 found (26%)
+            kills By Fire : 44
+           kills By Shell : 6
+           kills By Stomp : 9
+    PunJ : 0
+
+ min = 44.0
+ max = 44.0
+ ave = 44.0
+ sd  = NaN
+ n   = 1
+
+LearningWithFPS-2019-11-25_20-21-56.xml

@@ -44,9 +44,7 @@ public static void main(String[] args)
 {
     final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
     
-    //final Agent agent = new OwnAgent();
     final Agent agent = new OwnAgent3();
-    //final Agent agent = new OwnAgent3_2();
     marioAIOptions.setAgent(agent);
     
     marioAIOptions.setArgs("-lhs off -ltb on -lg off -lb off -ld 1 -ls 0 -le g");

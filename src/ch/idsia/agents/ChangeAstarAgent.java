@@ -6,7 +6,7 @@ import ch.idsia.benchmark.mario.environments.Environment;
 import java.util.Random;
 
 
-public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
+public class ChangeAstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
 
     static String name = "FPSAgent";
 
@@ -32,7 +32,7 @@ public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
     private boolean isDeadEnd = false;
 
     /* コンストラクタ */
-    public AstarAgent() {
+    public ChangeAstarAgent() {
         super(name);
         actions = new byte[3000]; // total frames（125*24）
     }
@@ -124,11 +124,11 @@ public class AstarAgent extends BasicMarioAIAgent implements Agent, Cloneable {
     }
 
     @Override
-    public AstarAgent clone() {
+    public ChangeAstarAgent clone() {
 
-        AstarAgent res;
+        ChangeAstarAgent res;
         try {
-            res = (AstarAgent) super.clone();
+            res = (ChangeAstarAgent) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new InternalError(e.toString());
         }

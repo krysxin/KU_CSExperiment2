@@ -8,8 +8,6 @@ import ch.idsia.tools.EvaluationInfo;
 import ch.idsia.tools.MarioAIOptions;
 import ch.idsia.utils.wox.serial.Easy;
 
-import java.util.HashMap;
-
 public class LearningWithFPS implements LearningAgent {
 
 	FPSAgent agent = new FPSAgent();
@@ -29,8 +27,6 @@ public class LearningWithFPS implements LearningAgent {
 	// 死んだ地点
 	private static int deathPoint = 0;
 
-	// 死んだ地点を記録するハッシュマップ
-	private HashMap<Integer, Integer> deathPoints = new HashMap<Integer, Integer>();
 	// 死んだ地点を記録する配列
 	private int deathPoints2[] = new int[256];
 
@@ -40,13 +36,6 @@ public class LearningWithFPS implements LearningAgent {
 		bestAgent = agent.clone();
 		this.args = args;
 	}
-
-	// public LearningWithFPS(int seed, int difficulty) {
-	// agent = new FPSAgent();
-	// bestAgent = agent.clone();
-	// this.seed = seed;
-	// this.difficulty = difficulty;
-	// }
 
 	public void learn() {
 
@@ -71,12 +60,7 @@ public class LearningWithFPS implements LearningAgent {
 			// 情報を取得
 			EvaluationInfo evaluationInfo = basicTask.getEvaluationInfo();
 
-			// 死んだ地点を取得し記録する
-			// deathPoint = evaluationInfo.distancePassedCells;
-			// if (deathPoints.containsKey(deathPoint))
-			// deathPoints.put(deathPoint, deathPoints.get(deathPoint) + 1);
-			// else
-			// deathPoints.put(deathPoint, 1);
+			
 			// 死んだ地点を取得し記録する
 			if (deathPoints2[deathPoint] != 0) {
 				deathPoints2[deathPoint] += 1;
@@ -138,7 +122,6 @@ public class LearningWithFPS implements LearningAgent {
 		byte[] actions = agent.getActions();
 
 		// 巻き戻すインデックス
-		// int rewindIndex = deathPoints.get(deathPoint) / 300 * 20;
 		int rewindIndex = deathPoints2[deathPoint] / 300 * 20; // 300回以上死んだら巻き戻す
 
 		// クリアした時
@@ -154,8 +137,14 @@ public class LearningWithFPS implements LearningAgent {
 		}
 		// 行き詰まった時
 		if (agent.getIsDeadEnd()) {
+			if (agent.getDeadEndIndex() <80) {
+				for (int i = 0; i < actions.length; i++) {
+					actions[i] = 0;
+				}
+			}else {
 			for (int i = agent.getDeadEndIndex() - 30; i < actions.length; i++) {
 				actions[i] = 0;
+			}
 			}
 		}
 		 //同じ場所で死に過ぎたらカウントを初期化
@@ -169,7 +158,7 @@ public class LearningWithFPS implements LearningAgent {
 		 }
 		
 
-		// 普通に死んだ時
+		// 上記以外の場合で死んだ時
 		for (int i = actionIndex - 10; i < actions.length; i++) {
 			actions[i] = 0;
 		}

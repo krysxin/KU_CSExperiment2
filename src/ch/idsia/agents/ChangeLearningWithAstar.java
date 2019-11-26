@@ -11,13 +11,13 @@ import ch.idsia.utils.wox.serial.Easy;
 import java.util.HashMap;
 
 
-public class LearningWithAstar implements LearningAgent {
+public class ChangeLearningWithAstar implements LearningAgent {
 
-    AstarAgent agent = new AstarAgent();
+    ChangeAstarAgent agent = new ChangeAstarAgent();
 
-    String name = "LearningWithAStar";
+    String name = "LearningWithFPS";
 
-    private AstarAgent bestAgent;
+    private ChangeAstarAgent bestAgent;
 
     private String args;
 
@@ -37,8 +37,8 @@ public class LearningWithAstar implements LearningAgent {
 
 
     /* LearningWithAStarのコンストラクタ */
-    public LearningWithAstar(String args) {
-        agent = new AstarAgent();
+    public ChangeLearningWithAstar(String args) {
+        agent = new ChangeAstarAgent();
         bestAgent = agent.clone();
         this.args = args;
     }
@@ -89,7 +89,7 @@ public class LearningWithAstar implements LearningAgent {
             }
 
             // 次の世代のagentを用意
-            AstarAgent nextAgent = new AstarAgent();
+            ChangeAstarAgent nextAgent = new ChangeAstarAgent();
 
             damagedIndex = agent.getDamagedIndex();
             actionIndex = agent.getActionIndex();
@@ -138,7 +138,7 @@ public class LearningWithAstar implements LearningAgent {
      * damagedIndex：ダメージを受けた時のindex
      * deathPoint：死んだ地点
      */
-    private void setNextAgent(AstarAgent agent, AstarAgent nextAgent, int n) {
+    private void setNextAgent(ChangeAstarAgent agent, ChangeAstarAgent nextAgent, int n) {
 
         // agentのactionsを取得
         byte[] actions = agent.getActions();

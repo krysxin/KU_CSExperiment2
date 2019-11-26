@@ -74,8 +74,8 @@ public class OwnAgent3 extends BasicMarioAIAgent implements Agent {
 	
 
 	public boolean[] getAction() {
-		//action[Mario.KEY_SPEED] = !action[Mario.KEY_SPEED];
-		action[Mario.KEY_SPEED] =isMarioAbleToShoot;
+		action[Mario.KEY_SPEED] = !action[Mario.KEY_SPEED];
+		//action[Mario.KEY_SPEED] =isMarioAbleToShoot;
 		
 		if (isObstacle(marioEgoRow, marioEgoCol + 1)
 				|| getEnemiesCellValue(marioEgoRow, marioEgoCol + 2) != Sprite.KIND_NONE

@@ -50,7 +50,7 @@ public class OwnAgent extends BasicMarioAIAgent implements Agent {
 	public void reset() {
 		action = new boolean[Environment.numberOfKeys];
 		action[Mario.KEY_RIGHT] = true;
-		//action[Mario.KEY_SPEED] = true;
+		action[Mario.KEY_SPEED] = true;
 	}
 
 	public boolean isObstacle(int r, int c) {
@@ -70,14 +70,6 @@ public class OwnAgent extends BasicMarioAIAgent implements Agent {
 		return true;
 	}
 
-	/*public boolean isToGap(int r, int c) {
-		for (int j = 0; j <= 9; j++) {
-			if (getReceptiveFieldCellValue(r + j, c + 3) != 0 || (getReceptiveFieldCellValue(r + j, c + 4) != 0)) {
-				return false;
-			}
-		}
-		return true;
-	}*/
 	
 
 	public boolean[] getAction() {
@@ -85,28 +77,16 @@ public class OwnAgent extends BasicMarioAIAgent implements Agent {
 				|| getEnemiesCellValue(marioEgoRow, marioEgoCol + 2) != Sprite.KIND_NONE
 				|| getEnemiesCellValue(marioEgoRow, marioEgoCol + 1) != Sprite.KIND_NONE) {
 			action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
-			
-			//if(isGap(marioEgoRow, marioEgoCol)) {action[Mario.KEY_LEFT] = 
-			
+			trueJumpCounter++;
 		}
 		if(isGap(marioEgoRow, marioEgoCol + 2)){
 			action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
-			
-			//action[Mario.KEY_RIGHT] = false;
-			
-			//action[Mario.KEY_LEFT] = true;
-			
-			//System.out.println(action[Mario.KEY_JUMP]);
-			//action[Mario.KEY_SPEED] = isMarioAbleToJump || !isMarioOnGround;
 		}
-		/*if(getReceptiveFieldCellValue(marioEgoRow, marioEgoCol )==GeneralizerLevelScene.BORDER_CANNOT_PASS_THROUGH) {
-			action[Mario.KEY_LEFT] = false;
-			action[Mario.KEY_RIGHT] = true;
-			action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
-		}*/
-		/*if(isToGap(marioEgoRow, marioEgoCol)) {
-			action[Mario.KEY_SPEED] = false;
-		}*/
+		if(trueJumpCounter>6) {
+			trueJumpCounter=0;
+			action[Mario.KEY_JUMP]=false;
+		}
+		
 		return action;
 	}
 

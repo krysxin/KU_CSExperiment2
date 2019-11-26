@@ -54,6 +54,7 @@ public static void save(Object ob, String filename)
         XMLOutputter out = new XMLOutputter(); // ("  ", true);
         FileWriter file = new FileWriter(filename);
         out.output(el, file);
+        file.flush();
         file.close();
         System.out.println("Saved object to " + filename);
     } catch (Exception e)

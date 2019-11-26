@@ -137,15 +137,10 @@ public class LearningWithFPS implements LearningAgent {
 		}
 		// 行き詰まった時
 		if (agent.getIsDeadEnd()) {
-			if (agent.getDeadEndIndex() <80) {
-				for (int i = 0; i < actions.length; i++) {
-					actions[i] = 0;
-				}
-			}else {
 			for (int i = agent.getDeadEndIndex() - 30; i < actions.length; i++) {
 				actions[i] = 0;
 			}
-			}
+			
 		}
 		 //同じ場所で死に過ぎたらカウントを初期化
 		 if (rewindIndex > actionIndex) {
